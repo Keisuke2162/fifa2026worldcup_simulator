@@ -464,6 +464,13 @@ input[type=number] { -moz-appearance: textfield; }
 .third-adv-cell { color: #4ade80; font-weight: 700; }
 .third-elim-cell { color: #64748b; }
 
+/* ===== Ad Banner ===== */
+.ad-banner {
+  background: #0a1628;
+  min-height: 90px;
+  width: 100%;
+}
+
 /* ===== Footer ===== */
 .app-footer {
   background: #0f172a;

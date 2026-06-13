@@ -3,6 +3,7 @@ import { GROUPS, GROUP_KEYS, initialMatchState } from './data/groups';
 import { calcGroupStandings, calcBestThirdPlace } from './utils/standings';
 import GroupPanel from './components/GroupPanel';
 import QualificationPanel from './components/QualificationPanel';
+import AdBanner from './components/AdBanner';
 import './App.css';
 
 export default function App() {
@@ -128,6 +129,7 @@ export default function App() {
       <footer className="app-footer">
         <p>48チーム・12グループ | 各グループ上位2チーム（計24）＋3位ベスト8チーム = 計32チームが決勝トーナメント進出</p>
       </footer>
+      <AdBanner slot="BOTTOM_AD_SLOT_ID" />
     </div>
   );
 }
