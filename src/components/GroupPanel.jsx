@@ -1,5 +1,11 @@
 import { calcGroupStandings } from '../utils/standings';
 
+function normalizeScore(value) {
+  return value
+    .replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
+    .replace(/[^0-9]/g, '');
+}
+
 export default function GroupPanel({ groupKey, group, matches, onScoreChange, thirdPlaceQualifiers }) {
   const standings = calcGroupStandings(group.teams, matches);
   const qualifiedThirds = new Set(thirdPlaceQualifiers.map((t) => t.team));
@@ -78,21 +84,21 @@ export default function GroupPanel({ groupKey, group, matches, onScoreChange, th
               <span className="match-team home">{match.home}</span>
               <div className="score-inputs">
                 <input
-                  type="number"
-                  min="0"
-                  max="99"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={2}
                   value={match.homeScore}
-                  onChange={(e) => onScoreChange(idx, 'homeScore', e.target.value)}
+                  onChange={(e) => onScoreChange(idx, 'homeScore', normalizeScore(e.target.value))}
                   className="score-input"
                   placeholder="−"
                 />
                 <span className="score-sep">:</span>
                 <input
-                  type="number"
-                  min="0"
-                  max="99"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={2}
                   value={match.awayScore}
-                  onChange={(e) => onScoreChange(idx, 'awayScore', e.target.value)}
+                  onChange={(e) => onScoreChange(idx, 'awayScore', normalizeScore(e.target.value))}
                   className="score-input"
                   placeholder="−"
                 />
