@@ -9,7 +9,7 @@ import './App.css';
 export default function App() {
   const [matches, setMatches] = useState(() => {
     try {
-      const saved = localStorage.getItem('wc2026-matches');
+      const saved = localStorage.getItem('wc2026-matches-v2');
       if (saved) return JSON.parse(saved);
     } catch {}
     return initialMatchState();
@@ -33,14 +33,14 @@ export default function App() {
       const next = { ...prev, [groupKey]: prev[groupKey].map((m, i) =>
         i === matchIdx ? { ...m, [field]: value } : m
       )};
-      localStorage.setItem('wc2026-matches', JSON.stringify(next));
+      localStorage.setItem('wc2026-matches-v2', JSON.stringify(next));
       return next;
     });
   }
 
   function handleReset() {
     if (window.confirm('全スコアをリセットしますか？')) {
-      localStorage.removeItem('wc2026-matches');
+      localStorage.removeItem('wc2026-matches-v2');
       setMatches(initialMatchState());
     }
   }
