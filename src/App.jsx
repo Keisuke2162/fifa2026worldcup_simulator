@@ -6,7 +6,13 @@ import QualificationPanel from './components/QualificationPanel';
 import './App.css';
 
 export default function App() {
-  const [matches, setMatches] = useState(initialMatchState);
+  const [matches, setMatches] = useState(() => {
+    try {
+      const saved = localStorage.getItem('wc2026-matches');
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return initialMatchState();
+  });
   const [activeTab, setActiveTab] = useState('A');
   const [view, setView] = useState('groups');
 
@@ -23,15 +29,17 @@ export default function App() {
 
   function handleScoreChange(groupKey, matchIdx, field, value) {
     setMatches((prev) => {
-      const updated = prev[groupKey].map((m, i) =>
+      const next = { ...prev, [groupKey]: prev[groupKey].map((m, i) =>
         i === matchIdx ? { ...m, [field]: value } : m
-      );
-      return { ...prev, [groupKey]: updated };
+      )};
+      localStorage.setItem('wc2026-matches', JSON.stringify(next));
+      return next;
     });
   }
 
   function handleReset() {
     if (window.confirm('全スコアをリセットしますか？')) {
+      localStorage.removeItem('wc2026-matches');
       setMatches(initialMatchState());
     }
   }
