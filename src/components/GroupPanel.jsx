@@ -81,7 +81,10 @@ export default function GroupPanel({ groupKey, group, matches, onScoreChange, th
         <div className="matches-section">
           {matches.map((match, idx) => (
             <div key={idx} className="match-row">
-              {match.date && <span className="match-date">{match.date}</span>}
+              <span className="match-date">
+                <span>{match.date}</span>
+                <span>{match.time}</span>
+              </span>
               <span className="match-team home">{match.home}</span>
               <div className="score-inputs">
                 <input
